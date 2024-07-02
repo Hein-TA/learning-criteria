@@ -79,7 +79,10 @@ public class AppointmentServiceTest {
 
 	@Order(4)
 	@ParameterizedTest
-	@CsvSource({ "ohn,Kyaw,091122334,16:00,false,1" })
+	@CsvSource({ 
+		"ohn,Kyaw,091122334,16:00,false,1",
+		",,,,,6"
+		})
 	void test_search_from_date_with_lesser_than_today(String doctorName, String patientName, String patientPhone, String startTime, Boolean canceled, int result) {
 		var list = service.search(new AppointmentSearch(doctorName, patientName, patientPhone, startTime, LocalDate.now().minusDays(10), null, canceled));
 		assertEquals(result, list.size());
@@ -87,7 +90,10 @@ public class AppointmentServiceTest {
 
 	@Order(5)
 	@ParameterizedTest
-	@CsvSource({ "nilar,Kyaw,09112233,16:00,false,1" })
+	@CsvSource({ 
+		"nilar,Kyaw,09112233,16:00,false,1",
+		",,,,,6"
+		})
 	void test_search_to_date_with_greater_than_today_date(String doctorName, String patientName, String patientPhone, String startTime, Boolean canceled, int result) {
 		var list = service.search(new AppointmentSearch(doctorName, patientName, patientPhone, startTime, null, LocalDate.now().plusDays(20), canceled));
 		assertEquals(result, list.size());
