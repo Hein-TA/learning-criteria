@@ -195,7 +195,7 @@ public class AppointmentServiceImpl extends AbstractService implements Appointme
 			}
 			
 			if (null != search.to()) {
-				params.add(cb.lessThan(root.get("id").get("appointmentDate"), search.to().plusDays(1)));
+				params.add(cb.lessThanOrEqualTo(root.get("id").get("appointmentDate"), search.to()));
 			}
 			
 			if (null != search.canceled()) {
